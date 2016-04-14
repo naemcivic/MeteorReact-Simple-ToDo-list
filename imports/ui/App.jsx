@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data'
 import { Tasks } from '../api/tasks.js';
 import Task from './Task.jsx';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 // App component - representation of the whole application
 class App extends Component {
@@ -45,6 +46,7 @@ class App extends Component {
     return (
       <div className="container">
         <header>
+
           <h1>Todo List ({this.props.incompleteCount})</h1>
 
             <label className="hide-completed">
@@ -57,16 +59,17 @@ class App extends Component {
               Hide Completed Tasks
             </label>
 
+            <AccountsUIWrapper />
 
+            <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+              <input
+                type='text'
+                ref='textInput'
+                placeholder='Enter a task here'
+                />
+            </form>
 
-          <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-            <input
-              type='text'
-              ref='textInput'
-              placeholder='Enter a task here'
-              />
-          </form>
-    </header>
+        </header>
         <ul>
           {this.renderTasks()}
         </ul>
