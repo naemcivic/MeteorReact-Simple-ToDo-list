@@ -7,9 +7,11 @@ export const Tasks = new Mongo.Collection('tasks');
 Meteor.methods({
   'tasks.insert'(text) {
     check(text, String);
-    if(! Meteor.userId()) {
+
+    if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
+
     Tasks.insert({
       text,
       createdAt: new Date(),
