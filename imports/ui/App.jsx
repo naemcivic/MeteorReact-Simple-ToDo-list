@@ -20,14 +20,10 @@ class App extends Component {
     e.preventDefault();
 
     //cache the text field via React ref
-    text = ReactDom.findDOMNode(this.refs.textInput).value.trim();
+    const text = ReactDom.findDOMNode(this.refs.textInput).value.trim();
 
-    Tasks.insert({
-      text,
-      createdAt: new Date(), //current time
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-    });
+    Meteor.call('tasks.insert', text);
+
     // clear form
     ReactDom.findDOMNode(this.refs.textInput).value='';
   }
