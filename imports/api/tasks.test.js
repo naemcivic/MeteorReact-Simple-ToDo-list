@@ -34,6 +34,14 @@ if (Meteor.isServer) {
         // Verify that the method does what we expected
         assert.equal(Tasks.find().count(), 0);
       });
+      it('can create a task', () => {
+
+        const createTask = Meteor.server.method_handlers['tasks.insert'];
+
+        const invocation = { userId };
+
+        assert.equal(Tasks.find().count(), 1);
+      });
     });
   });
 }
